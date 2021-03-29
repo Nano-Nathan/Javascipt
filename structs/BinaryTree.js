@@ -1,4 +1,4 @@
-export class Node {
+class Node {
     constructor( value, key ){
         this.value = value;
         this.key = key;
@@ -26,7 +26,7 @@ export class BinaryTree {
                         if(node.leftnode == null){
                             node.leftnode = new Node(value, key);
                             node.leftnode.parent = node;
-                            return true;
+                            return {...this};
                         } else {
                             return _addR(node.leftnode, value, key);
                         }
@@ -37,13 +37,12 @@ export class BinaryTree {
                         if(node.rightnode == null){
                             node.rightnode = new Node(value, key);
                             node.rightnode.parent = node;
-                            return true;
+                            return {...this};
                         } else {
                             return _addR(node.rightnode, value, key);
                         }
                     } else {
                         console.error("ERROR: Key ya existe en el arbol. Key: "+ key);
-                        return false;
                     }
                 }
                 
@@ -118,7 +117,7 @@ export class BinaryTree {
                 if(node != null){
                     if(node.key == key){
                         remove( node );
-                        return true
+                        return {...this};
                     } else if( node.key > key){
                         return _deleteR(node.leftnode, key);
                     } else {
@@ -126,7 +125,6 @@ export class BinaryTree {
                     } 
                 } else {
                     console.log("No se encuentra el valor");
-                    return false;
                 }
             }
 
@@ -147,14 +145,31 @@ export class BinaryTree {
             }
         } else {
             console.error("ERROR: Falta key. Se intenta eliminar: "+key);
-        } 
-
-
-
+        }
     }
-    
-    display ( ){
-        console.dir(this);
+    //Busca o actualiza un elemento
+    seardate (key, update = null) {
+        if (key != null){
+            function searchR(node, key, update){
+                if(node != null){
+                    if(key === node.key){
+                        if(update){
+                            node.value = update;
+                        } else {    
+                            return {...node};
+                        }
+                    } else if(key > node.key){
+                        return searchR(node.rightnode, key);
+                    } else if(key < node.key){
+                        return searchR(node.leftnode, key);
+                    }
+                }
+                return;
+            }
+            return searchR(this.root, key, update);
+        } else {
+            console.error("ERROR: Falta key. Se intenta buscar: "+key);
+        }
     }
 }
 

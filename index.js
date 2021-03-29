@@ -1,4 +1,4 @@
-import { BinaryTree, Node } from "./structs/BinaryTree.js";
+import { BinaryTree } from "./structs/BinaryTree.js";
 import { DoubleLinkedList } from "./structs/LinkedList.js";
 
 function PruebasLinkedList(){
@@ -15,23 +15,23 @@ function PruebasLinkedList(){
     l.delete(5);
     l.delete("Hola");
     l.delete();
-    l.display();
 
 }
-function PruebasBynaryTree(){
+function PruebasBinaryTree(){
 
     var b = new BinaryTree();
 
     var arr = [53, 93, 65, 7, 33, 12, 10, 86, 31, 44];
     arr.forEach(value => b.add(value, value) );
-
+    b.search(10);
     b.delete(10);
     b.delete(12);
     b.delete(93);
     b.delete(53);
-    b.display();
+    b.update(1, 4);
 }
 
 
 //PruebasLinkedList();
-PruebasBynaryTree();
+PruebasBinaryTree();
+
